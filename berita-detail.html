@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Berita - SoloHitz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Header dan Navigasi (salin dari index.html) -->
+    <header>
+        <!-- ... header content ... -->
+    </header>
+
+    <!-- Detail Berita Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <article id="article-detail">
+                        <div class="text-center my-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Memuat...</span>
+                            </div>
+                            <p class="mt-2">Memuat berita...</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (salin dari index.html) -->
+    <footer>
+        <!-- ... footer content ... -->
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Ambil ID artikel dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleId = urlParams.get('id');
+
+        // Fungsi untuk memformat tanggal
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('id-ID', options);
+        }
+
+        // Fungsi untuk memuat detail artikel
+        async function loadArticleDetail(id) {
+            const articleDetail = document.getElementById('article-detail');
+            
+            try {
+                // Tampilkan loading
+                articleDetail.innerHTML = `
+                    <div class="text-center my-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Memuat...</span>
+                        </div>
+                        <p class="mt-2">Memuat berita...</p>
+                    </div>
+                `;
+
+                // Fetch langsung tanpa proxy (asumsi API mendukung CORS)
+                const response = await fetch(`https://solohitz.com/wp-json/wp/v2/posts/${id}?_embed`);
+                
+                if (!response.ok) {
+                    if (response.status === 403) {
+                        throw new Error('Akses ditolak (403). Coba akses API langsung atau periksa izin server.');
+                    } else if (response.status === 404) {
+                        throw new Error('Artikel tidak ditemukan (404).');
+                    } else {
+                        throw new Error(`Gagal memuat artikel: Status ${response.status}`);
+                    }
+                }
+
+                const post = await response.json();
+                
+                // Ekstrak data yang diperlukan
+                const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 'assets/image/bsicentre.jpeg';
+                const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'Berita';
+                const date = formatDate(post.date);
+                const title = post.title.rendered;
+                const content = post.content.rendered;
+
+                // Update judul halaman
+                document.title = `${title} - SoloHitz`;
+
+                // Render konten artikel
+                articleDetail.innerHTML = `
+                    <nav aria-label="breadcrumb" class="mb-4">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Beranda</a></li>
+                            <li class="breadcrumb-item"><a href="#" class="category-link" data-category="${category}">${category}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">${title}</li>
+                        </ol>
+                    </nav>
+                    
+                    <div class="article-header">
+                        <h1 class="article-title">${title}</h1>
+                        <div class="article-meta">
+                            <span class="article-date">
+                                <i class="far fa-calendar-alt"></i> ${date}
+                            </span>
+                            <span class="article-category">
+                                <i class="fas fa-tag"></i>
+                                <span class="badge bg-primary">${category}</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="article-featured-image">
+                        <img src="${featuredImage}" alt="${title}" class="img-fluid rounded" onerror="this.src='assets/image/default-news.jpg'">
+                    </div>
+                    
+                    <div class="article-content mt-4">
+                        ${content}
+                    </div>
+                    
+                    <div class="mt-5">
+                        <a href="index.html" class="btn btn-outline-primary">
+                            <i class="fas fa-arrow-left me-2"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+                `;
+
+                // Tambahkan event listener untuk kategori
+                const categoryLink = document.querySelector('.category-link');
+                if (categoryLink) {
+                    categoryLink.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Kategori diklik:', category);
+                    });
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                articleDetail.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">Gagal Memuat Berita</h4>
+                        <p>${error.message || 'Terjadi kesalahan saat memuat berita. Silakan coba lagi nanti atau periksa koneksi internet Anda.'}</p>
+                        <hr>
+                        <p class="mb-0">Tips: Jika error 403, coba akses API langsung di browser atau gunakan VPN. Jika tetap gagal, hubungi admin situs.</p>
+                        <a href="index.html" class="btn btn-primary mt-3">
+                            <i class="fas fa-home me-2"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        // Muat artikel saat halaman selesai dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            if (articleId) {
+                loadArticleDetail(articleId);
+            } else {
+                document.getElementById('article-detail').innerHTML = `
+                    <div class="alert alert-warning" role="alert">
+                        <h4 class="alert-heading">Berita Tidak Ditemukan</h4>
+                        <p>ID berita tidak valid atau tidak ditemukan.</p>
+                        <hr>
+                        <a href="index.html" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i> Kembali ke Beranda
+                        </a>
+                    </div>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>
