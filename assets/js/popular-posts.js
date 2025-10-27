@@ -343,9 +343,59 @@ function displaySidebarPopularPosts() {
     });
 }
 
+// === FILTER BERDASARKAN KATEGORI ===
+function filterPostsByCategory(category) {
+    const container = document.getElementById('articles-container');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    let filteredPosts = [];
+    if (category === 'all') {
+        filteredPosts = apiPosts.slice(1); // semua kecuali featured
+    } else {
+        filteredPosts = apiPosts.filter(
+            post => post.category.toLowerCase() === category.toLowerCase()
+        );
+    }
+
+    if (filteredPosts.length === 0) {
+        container.innerHTML = `
+            <div class="col-12 text-center my-5">
+                <div class="alert alert-warning">Belum ada berita pada kategori <strong>${category}</strong>.</div>
+            </div>
+        `;
+        return;
+    }
+
+    filteredPosts.forEach(post => {
+        const postElement = createRecentPostElement(post);
+        container.appendChild(postElement);
+    });
+}
+
+// === EVENT HANDLER UNTUK LINK KATEGORI ===
+function setupCategoryFilter() {
+    const categoryLinks = document.querySelectorAll('.category-filter');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Atur tampilan active pada menu
+            categoryLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+
+            const selectedCategory = this.getAttribute('data-category');
+            filterPostsByCategory(selectedCategory);
+        });
+    });
+}
+
+
 // Inisialisasi
 document.addEventListener('DOMContentLoaded', async function() {
     await displayFeaturedPosts();
     displaySidebarPopularPosts();
     setupNewsModal();
+    setupCategoryFilter(); // Tambahkan baris ini
 });
