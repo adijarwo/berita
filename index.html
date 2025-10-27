@@ -71,7 +71,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">SoloHitz<span>News</span></a>
+                    <a class="navbar-brand" href="#">Bold<span>News</span></a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -117,7 +117,8 @@
                         </div>
                         <div class="scrolling-text-wrapper flex-grow-1 overflow-hidden">
                             <div class="scrolling-text">
-                                <span class="text-muted">Berita terpopuler dan terkini seputar pendidikan, teknologi, dan kegiatan kampus di Solo dan sekitarnya</span>
+                                <span class="text-muted">Selamat datang di BoldNews. Situs ini adalah web replikasi yang menyajikan kompilasi berita terpopuler dan terkini seputar dunia pendidikan, perkembangan teknologi, dan berbagai kegiatan kampus di Solo dan sekitarnya. 
+                                Kami bertujuan menyajikan informasi yang relevan dalam satu platform yang mudah diakses.</span>
                             </div>
                         </div>
                     </div>
@@ -143,18 +144,7 @@
                     <main class="my-5">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h2 class="section-title mb-0">Berita Terbaru</h2>
-                            <div class="dropdown">
-                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Kategori
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
-                                    <li><a class="dropdown-item category-filter active" href="#" data-category="all">Semua Kategori</a></li>
-                                    <li><a class="dropdown-item category-filter" href="#" data-category="Pendidikan">Pendidikan</a></li>
-                                    <li><a class="dropdown-item category-filter" href="#" data-category="Teknologi">Teknologi</a></li>
-                                    <li><a class="dropdown-item category-filter" href="#" data-category="Magang">Magang</a></li>
-                                    <li><a class="dropdown-item category-filter" href="#" data-category="Workshop">Workshop</a></li>
-                                </ul>
-                            </div>
+                            
                         </div>
                         <div id="articles-container" class="row">
                             <!-- Berita terbaru akan dimuat di sini oleh JavaScript -->
@@ -172,6 +162,7 @@
                     <div class="sidebar-widget mb-4">
                         <h3 class="widget-title">Kategori</h3>
                         <ul class="category-list">
+                            <li><a href="#" class="category-filter" data-category="Berita">Berita<span class="badge bg-primary float-end">10</span></a></li>
                             <li><a href="#" class="category-filter" data-category="Pendidikan">Pendidikan <span class="badge bg-primary float-end">5</span></a></li>
                             <li><a href="#" class="category-filter" data-category="Teknologi">Teknologi <span class="badge bg-primary float-end">3</span></a></li>
                             <li><a href="#" class="category-filter" data-category="Magang">Magang <span class="badge bg-primary float-end">7</span></a></li>
@@ -207,58 +198,55 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-top">
+    <footer class="footer text-light mt-5">
+        <div class="footer-top py-5" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                        <h3 class="footer-title">Tentang SoloHitz News</h3>
-                        <p>Portal berita yang menyajikan informasi terkini seputar pendidikan, teknologi, dan kegiatan kampus di wilayah Solo dan sekitarnya.</p>
-                        <div class="social-links mt-3">
-                            <a href="#" data-bs-toggle="tooltip" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" data-bs-toggle="tooltip" title="Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="#" data-bs-toggle="tooltip" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="#" data-bs-toggle="tooltip" title="YouTube"><i class="fab fa-youtube"></i></a>
-                            <a href="#" data-bs-toggle="tooltip" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <div class="row gy-4">
+                    <!-- Tentang -->
+                    <div class="col-lg-5 col-md-6">
+                        <h3 class="footer-title text-uppercase fw-bold mb-3">Tentang SoloHitz News</h3>
+                        <p class="text-light opacity-75">
+                            SoloHitz News adalah portal berita yang menyajikan informasi terkini seputar pendidikan,
+                            teknologi, dan kegiatan kampus di wilayah Solo dan sekitarnya. Kami berkomitmen memberikan
+                            berita inspiratif dan terpercaya untuk pembaca muda yang dinamis.
+                        </p>
+                        <div class="social-links mt-3 d-flex gap-3">
+                            <a href="https://facebook.com/nugroho.ri.37" target="_blank" title="Facebook" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/ynnn_dii/" target="_blank" title="Instagram" class="social-icon"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@adiryansujarwo2225" target="_blank" title="YouTube" class="social-icon"><i class="fab fa-youtube"></i></a>
+                            <a href="http://linkedin.com/in/adi-ryan-sujarwo-9a9778299/" target="_blank" title="LinkedIn" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.tiktok.com/@larasaticassavacake" target="_blank" title="TikTok" class="social-icon"><i class="fab fa-tiktok"></i></a>
                         </div>
                     </div>
-                    <div class="col-lg-2 col-md-6 mb-4 mb-lg-0">
-                        <h3 class="footer-title">Tautan Cepat</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Beranda</a></li>
-                            <li><a href="#">Tentang Kami</a></li>
-                            <li><a href="#">Kategori</a></li>
-                            <li><a href="#">Kontak</a></li>
-                            <li><a href="#">Kebijakan Privasi</a></li>
-                            <li><a href="#">Syarat & Ketentuan</a></li>
-                        </ul>
+
+                    <!-- Langganan Berita -->
+                    <div class="col-lg-4 col-md-6">
+                        <h3 class="footer-title text-uppercase fw-bold mb-3">Langganan Berita</h3>
+                        <p class="text-light opacity-75">Dapatkan berita terbaru langsung ke email Anda setiap minggu.</p>
+                        <form class="d-flex flex-column gap-2">
+                            <input type="email" class="form-control form-control-sm" placeholder="Masukkan email Anda" required>
+                            <button type="submit" class="btn btn-primary btn-sm w-100">Langganan</button>
+                        </form>
                     </div>
-                    <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-                        <h3 class="footer-title">Kategori Populer</h3>
-                        <ul class="footer-links">
-                            <li><a href="#">Pendidikan</a></li>
-                            <li><a href="#">Teknologi</a></li>
-                            <li><a href="#">Magang</a></li>
-                            <li><a href="#">Workshop</a></li>
-                            <li><a href="#">Beasiswa</a></li>
-                            <li><a href="#">Kegiatan Kampus</a></li>
-                        </ul>
-                    </div>
+
+                    <!-- Kontak -->
                     <div class="col-lg-3 col-md-6">
-                        <h3 class="footer-title">Kontak Kami</h3>
-                        <ul class="footer-contact">
-                            <li><i class="fas fa-map-marker-alt"></i> Jl. Soekarno Hatta No. 123, Solo, Indonesia</li>
-                            <li><i class="fas fa-phone"></i> +62 123 4567 8901</li>
-                            <li><i class="fas fa-envelope"></i> info@solohitznews.com</li>
-                            <li><i class="fas fa-globe"></i> www.solohitznews.com</li>
+                        <h3 class="footer-title text-uppercase fw-bold mb-3">Kontak Kami</h3>
+                        <ul class="footer-contact list-unstyled">
+                            <li class="mb-2"><i class="fas fa-map-marker-alt me-2"></i> Jl. Soekarno Hatta No. 123, Solo, Indonesia</li>
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i> +62 123 4567 8901</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i> info@solohitznews.com</li>
+                            <li><a href="https://solohitz.com/" target="_blank" class="footer-link"><i class="fas fa-globe me-2"></i> www.solohitz.com</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom text-center py-3">
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom text-center py-3 bg-dark border-top border-secondary">
             <div class="container">
-                <p class="mb-0">&copy; <span class="current-year">2025</span> SoloHitz News. All rights reserved.</p>
+                <p class="mb-0 small text-light">&copy; <span class="current-year">2025</span> BoldNews. All rights reserved.</p>
             </div>
         </div>
     </footer>
